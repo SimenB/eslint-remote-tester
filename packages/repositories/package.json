@@ -1,6 +1,6 @@
 {
     "name": "eslint-remote-tester-repositories",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "author": "Ari Perkkio <ari.perkkio@gmail.com>",
     "description": "Shared repositories for eslint-remote-tester.config.js",
     "license": "MIT",
@@ -46,8 +46,8 @@
         "chalk": "^4.1.2",
         "node-fetch": "^2.7.0",
         "ts-node": "^10.9.2",
-        "tsc-alias": "^1.8.8",
-        "typescript": "^5.1.6",
+        "tsc-alias": "^1.8.10",
+        "typescript": "^5.5.2",
         "vitest": "^1.6.0"
     },
     "keywords": [

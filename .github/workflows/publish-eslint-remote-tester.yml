@@ -14,12 +14,13 @@ on:
 jobs:
     publish:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            id-token: write
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: '20'
-                  registry-url: 'https://registry.npmjs.org'
+
+            - uses: ./.github/actions/setup-and-cache
 
             - name: Install
               run: pnpm install
@@ -36,14 +37,16 @@ jobs:
                   git config --global user.email 'github-actions@users.noreply.github.com'
 
             - name: Bump version
-              run: npm version ${{ github.event.inputs.release-type }}
               working-directory: ./packages/eslint-remote-tester
+              run: |
+                  mkdir .git
+                  npm version ${{ github.event.inputs.release-type }}
 
             - name: Push release tag
               run: git push origin master --follow-tags
 
             - name: Publish to npm
-              run: npm publish
+              run: npm publish --provenance
               working-directory: ./packages/eslint-remote-tester
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
